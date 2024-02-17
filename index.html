@@ -30,6 +30,38 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!--css for contact-->
+
+  <style>
+    form input, form textarea{
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: #f8fbfe;
+    padding: 15px;
+    margin: 15px 0;
+    color: black;
+    font-size: 18px;
+    border-radius: 6px;
+}
+form .btn2{
+    padding: 10px 30px;
+    font-size: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+    background:#2487ce;
+    border-radius: 6px;
+    color: white;
+}
+#msg{
+  color:#61b752;
+  margin-top: 6px;
+  display: block;
+}
+  </style>
+
+  <!--css for contact end-->
+
  
 </head>
 
@@ -50,6 +82,8 @@
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li><a class="getstarted scrollto" href="https://rmsdashboard.re4billion.ai/" target="_blank">Dashboard</a></li>
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -213,9 +247,18 @@ Intelligence RMS powered by AI enables          </h1>
         <div class="section-title">
           <h2>Contact</h2>
           <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+          <div class="contact-right">
+            <form name="submit-to-google-sheet">
+                <input type="text" name="Name" placeholder="Your Name" required>
+                <input type="email" name="Email" placeholder="Your Email" required>
+                <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                <button type="submit" class="btn btn2">Submit</button>
+            </form>
+            <span id="msg"></span>
+        </div>
         </div>
 
-        <div>
+        <div style="margin-top: 20px;">
           <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.149547632068!2d80.25556011463553!3d12.962280818590354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d09c97aa917%3A0xac713466b2f68201!2sRE4BILLION.AI!5e0!3m2!1sen!2sin!4v1657008852240!5m2!1sen!2sin" frameborder="0" allowfullscreen></iframe>
         </div>
        
@@ -274,9 +317,9 @@ Intelligence RMS powered by AI enables          </h1>
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Team</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#hero">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#team">Team</a></li>
               
             </ul>
           </div>
@@ -313,6 +356,29 @@ Intelligence RMS powered by AI enables          </h1>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!--script for contact-->
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzrGSJTdEjfrny0svkdVoL29g4__LXISoItq3f8Wh_q7i38dxfwDgUSKLELtD137LB3/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+          msg.innerHTML="Message sent successfully"
+          setTimeout(function(){
+            msg.innerHTML=""
+          },4000)
+          form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+
+   <!--script for contact end-->
 
 </body>
 
